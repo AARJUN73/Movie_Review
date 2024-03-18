@@ -11,11 +11,12 @@ import CardContent from '@mui/material/CardContent';
 
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
+import { API } from './global';
 export default function Movie({movieTake,getmovies}) {
   const navigate=useNavigate();
   const [show,setShow]=useState(true);
   function deleteMovie(id){
-    fetch(`https://65f29ba3034bdbecc7654d97.mockapi.io/mockapi/${id}`,{method:'DELETE'}).
+    fetch(`${API}/delete/${id}`,{method:'DELETE'}).
     then(()=>getmovies()).then(()=>alert("this card gets deleted now."))
     console.log(id);
   }
@@ -29,7 +30,7 @@ export default function Movie({movieTake,getmovies}) {
             {show ?<ExpandLessIcon fontSize='large' />:<ExpandMoreIcon fontSize='large'/>}  
             </IconButton>
 
-            <IconButton color="primary" aria-label="movie-info" onClick={()=>navigate(`/portal/view/${movieTake.id}`)}>
+            <IconButton color="primary" aria-label="movie-info" onClick={()=>navigate(`/portal/view/${movieTake._id}`)}>
                 <InfoIcon fontSize='medium' />
                         
             </IconButton>
@@ -44,12 +45,12 @@ export default function Movie({movieTake,getmovies}) {
         
         <IconButton sx={{marginLeft:"auto"}}
         aria-label='editmovie'
-        onClick={()=>navigate(`/portal/edit/${movieTake.id}`)}>
+        onClick={()=>navigate(`/portal/edit/${movieTake._id}`)}>
                 <EditIcon color='secondary'/>
         </IconButton>
         <IconButton sx={{marginLeft:"auto"}}
         aria-label='editmovie'
-        onClick={()=>deleteMovie(movieTake.id)}>
+        onClick={()=>deleteMovie(movieTake._id)}>
                 <DeleteIcon color='secondary'/>
         </IconButton>
 

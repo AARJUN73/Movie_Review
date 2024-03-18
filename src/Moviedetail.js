@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { API } from './global';
 
 export default function Moviedetail() {
     const navigate=useNavigate();
@@ -14,7 +14,7 @@ export default function Moviedetail() {
         color:movie.rating>=8.5?"green":"red",
     };
     useEffect(()=>{
-        fetch(`https://65f29ba3034bdbecc7654d97.mockapi.io/mockapi/${id}`,{
+        fetch(`${API}/getone/${id}`,{
             method:"GET",
         })
         .then((data)=>data.json())

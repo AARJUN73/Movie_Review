@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
+import { API } from './global';
 export default function Addmovie() {
   const navigate=useNavigate()
     const movievalidation=yup.object({
@@ -29,7 +30,8 @@ export default function Addmovie() {
   });
 
   const addmovie=(movie)=>{
-    fetch("https://65f29ba3034bdbecc7654d97.mockapi.io/mockapi",{
+    //fetch("https://65f29ba3034bdbecc7654d97.mockapi.io/mockapi"
+    fetch(`${API}/post`,{
       method:"POST",
       body:JSON.stringify(movie),
       headers:{"Content-Type":"application/json"},

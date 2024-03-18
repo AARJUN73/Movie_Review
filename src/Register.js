@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as yup from "yup";
 import { Link } from 'react-router-dom';
+import { API } from './global';
+import { useNavigate } from 'react-router-dom';
 export default function Register() {
     const movievalidation=yup.object({
         username:yup.string().required(),
@@ -18,9 +20,21 @@ export default function Register() {
     },
     validationSchema:movievalidation,
     onSubmit:(values)=>{
-        console.log(values);
+        //console.log(values);
+        register(values)
     }
   });
+  const navigate=useNavigate()
+  const register=(values)=>{
+    fetch(`${API}/register`,{
+    method:'POST',
+    body:JSON.stringify(values),
+    headers:{"content-Type":"application/json"}
+    })
+    .then(()=>alert("successfully registered"))
+    .then(()=>navigate("/"))
+  }
+
   return (
     <div>
          <form className='addform' onSubmit={formik.handleSubmit}>
